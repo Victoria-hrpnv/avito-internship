@@ -3,15 +3,27 @@
     flex-direction: column;
     max-width: 1600px;
     margin: 0 50px 0;
-    width: 100%;
-    height: 100%;
 }
 .skeleton{
     max-width: 1600px;
 }
 
-.col{
+.row{
+    align-items: stretch;
+    border-radius: 8px;
+    border: 1px solid rgba(22, 119, 255, 0.5);
+}
 
-    align-items: stretch; /* Колонки растягиваются по высоте */
-    gap: 0;
+.card_grid{
+    width: 33.333%;
+    text-align: center;
+}
+
+.card{
+    padding: 15px;
+    text-align: left;
+    border-radius: 2px;
+    width: 100%;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
 }

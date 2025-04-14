@@ -3,7 +3,7 @@ package models
 // GetBoardsResponse представляет структуру ответа для списка досок
 // @Description Содержит основную информацию о доске и количество задач
 type GetBoardsResponse struct {
-	ID          uint   `json:"id"`
+	ID          uint   `json:"boardId"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	TaskCount   int    `json:"taskCount"`
