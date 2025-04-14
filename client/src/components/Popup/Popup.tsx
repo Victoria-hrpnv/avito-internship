@@ -4,8 +4,6 @@ import {Button, Flex, Form, Input, Modal, Select, Typography} from "antd";
 import taskStore, {Tasks} from "../../store/TaskStore.ts";
 import TextArea from "antd/es/input/TextArea";
 import {Link} from "react-router-dom";
-
-
 const {Title} = Typography;
 
 
@@ -124,18 +122,6 @@ const Popup = observer(() => {
                         ))}
                         onChange={(value) => {
                             handleInputChange('assigneeId', value);
-                            const selectedUser = taskStore.users.find((user) => user.id === value);
-                            if (selectedUser) {
-                                const assignee = {
-                                    id: selectedUser.id,
-                                    fullName: selectedUser.fullName,
-                                    email: selectedUser.email,
-                                    avatarUrl: selectedUser.avatarUrl,
-                                };
-                                taskStore.setModalData({
-                                    assignee: assignee,
-                                });
-                            }
                         }}
                     />
                 </Form.Item>

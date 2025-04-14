@@ -1,6 +1,5 @@
 import { makeAutoObservable, } from "mobx";
 
-
 export interface Board {
     boardId: string,
     name: string,
@@ -36,13 +35,13 @@ export interface User {
 }
 
 export interface Data {
-    id?:number,
-    title?: string,
-    description?: string,
-    priority?: string,
-    assigneeId?: number,
-    boardId?: number,
-    status?: string
+    id?:number | undefined,
+    title?: string  | undefined,
+    description?: string  | undefined,
+    priority?: string  | undefined,
+    assigneeId?: number  | undefined,
+    boardId?: number  | undefined,
+    status?: string  | undefined
 }
 
 class TaskStore {
@@ -123,7 +122,6 @@ class TaskStore {
             priority: this.modalData.priority,
             title: this.modalData.title
         }
-         console.log(JSON.stringify(data))
         try {
                 const response = await fetch('http://localhost:8080/api/v1/tasks/create', {
                     method: 'POST',
@@ -176,31 +174,6 @@ class TaskStore {
         }
     }
 
-
-    fetchUpdateStatusTask = async (id:number)=> {
-        const data:Data ={
-            status: this.modalData.status,
-        }
-
-        try {
-            const response = await fetch(`http://localhost:8080/api/v1/tasks/updateStatus/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            if (!response.ok) {
-                throw new Error('Ошибка при создании задачи');
-            }
-            const responseData = await response.json();
-            console.log('Задача успешно обновлена:', responseData );
-        }
-        catch (error) {
-            console.error('Ошибка при отправке запроса:', error);
-        }
-    }
   //доски
     fetchBoards = async () => {
         this.isLoading = true;
