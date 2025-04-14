@@ -13,9 +13,9 @@ const Popup = observer(() => {
     const [form] = Form.useForm();
     useEffect(() => {
         if (taskStore.modalIsOpen) {
-            form.setFieldsValue(taskStore.modalData);  // Предзаполняем поля формы
+            form.setFieldsValue(taskStore.modalData);
         }
-    }, [taskStore.modalIsOpen, taskStore.modalData]); // Следим за изменением modalIsOpen и modalData
+    }, [taskStore.modalIsOpen, taskStore.modalData]);
 
     const updateTask = async () => {
         try {
