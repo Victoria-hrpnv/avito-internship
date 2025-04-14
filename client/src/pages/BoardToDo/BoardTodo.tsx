@@ -18,7 +18,6 @@ const BoardsTodo = observer(() => {
     }
     const editModal = (item) => {
         if (item) {
-            // Редактирование существующей задачи
             taskStore.setModalData({
                 id: item.id,
                 title: item.title,
