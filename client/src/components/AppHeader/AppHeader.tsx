@@ -15,7 +15,6 @@ const AppHeader = observer(() => {
     ];
     const editModal = (item) => {
         if (item) {
-            // Редактирование существующей задачи
             taskStore.setModalData({
                 id: item.id,
                 title: item.title,
@@ -26,7 +25,6 @@ const AppHeader = observer(() => {
                 status: item.status
             });
         } else {
-            // Создание новой задачи - сбрасываем данные
             taskStore.setModalData({
                 id: undefined,
                 title: undefined,

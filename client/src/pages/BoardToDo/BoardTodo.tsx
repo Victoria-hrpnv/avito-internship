@@ -31,8 +31,8 @@ const BoardsTodo = observer(() => {
         } else {
             taskStore.setModalData({
                 id: undefined,
-                title: '',
-                description: '',
+                title: undefined,
+                description: undefined,
                 priority: undefined,
                 assigneeId: undefined,
                 boardId: undefined,
