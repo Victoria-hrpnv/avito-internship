@@ -133,7 +133,6 @@ const Popup:FC = observer(() => {
                         }}
                     />
                 </Form.Item>
-
             </Flex>
             </Form>
         </Modal>

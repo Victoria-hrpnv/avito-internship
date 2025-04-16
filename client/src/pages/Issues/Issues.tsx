@@ -68,7 +68,7 @@ const Issues:FC = observer(() => {
     }
 
 
-    const filteredTasks = taskStore.tasks.filter((task) => {
+    const filteredTasks = taskStore.tasks.filter((task:Tasks) => {
         const matchesSearch = task.title.toLowerCase().includes(searchValue);
         const matchesStatus = statusFilter ? task.status === statusFilter : true;
         const matchesBoard = boardFilter ? task.boardId === Number(boardFilter) : true;

@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import taskStore from "../../store/TaskStore.ts";
 import {FC} from "react";
 
-
 const {Title} = Typography;
 const {Content} = Layout;
 

@@ -132,7 +132,6 @@ class TaskStore {
             console.error('Ошибка при отправке запроса:', error);
          }
     }
-
     fetchUpdateTask = async (id: number | undefined)=> {
         const data:Data ={
             assigneeId: this.modalData.assigneeId,

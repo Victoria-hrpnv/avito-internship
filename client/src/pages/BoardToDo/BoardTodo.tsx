@@ -79,8 +79,6 @@ const BoardsTodo = observer(() => {
             </Card>
         </Content>
     )
-
-
 })
 
 export default BoardsTodo

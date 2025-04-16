@@ -34,7 +34,8 @@ const AppHeader:FC = observer(() => {
     };
 
     const selectedKey:string = menuItems.find(item => item.path === location.pathname)?.key || '1'
-    return (<>
+    return (
+        <>
         <Popup />
             <Header className={styles.header}>
                 <div className={styles.header_menu}>
