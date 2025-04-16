@@ -1,4 +1,4 @@
-import taskStore from "../../store/TaskStore.ts";
+import taskStore, {Tasks} from "../../store/TaskStore.ts";
 import {
     Avatar,
     Button,
@@ -13,20 +13,22 @@ import {
 import {Typography} from 'antd';
 import styles from './Issues.module.css'
 import {observer} from "mobx-react-lite";
-import {useState} from "react";
+import {FC, useState} from "react";
 
 const { Meta } = Card;
 const {Title} = Typography;
 const {Content} = Layout;
 const { Search } = Input;
 
-const Issues = observer(() => {
-    const [searchValue, setSearchValue] = useState(""); //  поиск
-    const [statusFilter, setStatusFilter] = useState<string | undefined>(); // Фильтр по статусу
-    const [boardFilter, setBoardFilter] = useState<string | undefined>(); // Фильтр по доске
-    const editModal = (item) => {
+type StatusFilter = "Backlog" | "InProgress" | "Done" | undefined;
+type BoardFilter = string | undefined;
+
+const Issues:FC = observer(() => {
+    const [searchValue, setSearchValue] = useState<string>(""); //  поиск
+    const [statusFilter, setStatusFilter] = useState<StatusFilter>(); // Фильтр по статусу
+    const [boardFilter, setBoardFilter] = useState<BoardFilter>(); // Фильтр по доске
+    const editModal = (item: Tasks | null) => {
         if (item) {
-            // Редактирование существующей задачи
             taskStore.setModalData({
                 id: item.id,
                 title: item.title,
@@ -53,11 +55,11 @@ const Issues = observer(() => {
         setSearchValue(value.toLowerCase());
     };
 
-    const handleStatusChange = (value: string | undefined) => {
+    const handleStatusChange = (value: StatusFilter) => {
         setStatusFilter(value);
     };
 
-    const handleBoardChange = (value: string | undefined) => {
+    const handleBoardChange = (value: BoardFilter) => {
         setBoardFilter(value);
     };
 
@@ -69,7 +71,7 @@ const Issues = observer(() => {
     const filteredTasks = taskStore.tasks.filter((task) => {
         const matchesSearch = task.title.toLowerCase().includes(searchValue);
         const matchesStatus = statusFilter ? task.status === statusFilter : true;
-        const matchesBoard = boardFilter ? task.boardId === boardFilter : true;
+        const matchesBoard = boardFilter ? task.boardId === Number(boardFilter) : true;
         return matchesSearch && matchesStatus && matchesBoard;
     });
 

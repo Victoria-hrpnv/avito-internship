@@ -4,6 +4,7 @@ import styles from './BoardToDo.module.css'
 import {Typography} from 'antd';
 import { useParams} from "react-router-dom";
 import taskStore from "../../store/TaskStore.ts";
+import { Tasks } from "../../store/TaskStore.ts";
 
 const { Meta } = Card;
 const {Title} = Typography;
@@ -16,7 +17,7 @@ const BoardsTodo = observer(() => {
     if (taskStore.isLoading) {
         return <Skeleton className={styles.skeleton} active />;
     }
-    const editModal = (item) => {
+    const editModal = (item : Tasks | null) => {
         if (item) {
             taskStore.setModalData({
                 id: item.id,
@@ -41,9 +42,7 @@ const BoardsTodo = observer(() => {
         taskStore.openModal({ edit: item, issues: false});
     };
 
-
     return (
-
         <Content className={styles.content}>
             <Title level={2}>{boardName}</Title>
             <Card

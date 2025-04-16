@@ -6,7 +6,6 @@ export interface Board {
     description: string,
     taskCount: number
 }
-
 export interface Tasks {
     id: number,
     title: string,
@@ -22,7 +21,6 @@ export interface Tasks {
     boardId: number,
     boardName: string
 }
-
 export interface User {
     id: number,
     fullName: string,
@@ -33,7 +31,6 @@ export interface User {
     teamName: string,
     tasksCount: number
 }
-
 export interface Data {
     id?:number | undefined,
     title?: string  | undefined,
@@ -43,7 +40,6 @@ export interface Data {
     boardId?: number  | undefined,
     status?: string  | undefined
 }
-
 class TaskStore {
     boards: Board[] = []
     tasks: Tasks[] = []
@@ -53,23 +49,20 @@ class TaskStore {
     modalIsOpen = false;
     isEdit: boolean = false;
     openIssues:boolean = false
-
     constructor() {
         makeAutoObservable(this)
     }
-
     openModal(payload:{ edit, issues}) {
         console.log(this.modalData)
         this.isEdit = payload.edit;
         this. openIssues = payload.issues;
         this.modalIsOpen = true;
     }
-
     closeModal() {
         this.modalIsOpen = false;
 
     }
-    setModalData(data: Partial<typeof this.modalData>) {
+    setModalData(data: Data) {
         this.modalData = { ...this.modalData, ...data };
     }
 
@@ -82,11 +75,9 @@ class TaskStore {
                     'Accept': 'application/json',
                 },
             });
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
             const data = await response.json();
             this.users = data.data;
         } catch (error) {
@@ -173,7 +164,6 @@ class TaskStore {
             console.error('Ошибка при отправке запроса:', error);
         }
     }
-
   //доски
     fetchBoards = async () => {
         this.isLoading = true;
@@ -190,13 +180,10 @@ class TaskStore {
         this.boards = data.data
         this.isLoading=false
     };
-
-
     getBoardName (id:string) : string{
         const board = this.boards.find((board) => board.boardId == id);
         return board ? board.name : 'Доска не найдена';
     }
-
 }
 
 export default new TaskStore()

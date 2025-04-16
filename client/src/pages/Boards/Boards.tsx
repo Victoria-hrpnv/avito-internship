@@ -4,19 +4,17 @@ import styles from './Boards.module.css'
 import {Typography} from 'antd';
 import {Link} from "react-router-dom";
 import taskStore from "../../store/TaskStore.ts";
+import {FC} from "react";
 
 
 const {Title} = Typography;
 const {Content} = Layout;
 
-const Boards = observer(() => {
+const Boards:FC = observer(() => {
 
     if (taskStore.isLoading) {
         return (<Skeleton className={styles.skeleton} active/>)
     }
-    // if (error instanceof Error) {
-    //     return <div>Ошибка: {error.message}</div>;
-    // }
 
     return (
         <Content className={styles.content}>

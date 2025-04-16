@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button, Flex, Form, Input, Modal, Select, Typography} from "antd";
 import taskStore, {Tasks} from "../../store/TaskStore.ts";
@@ -6,9 +6,17 @@ import TextArea from "antd/es/input/TextArea";
 import {Link} from "react-router-dom";
 const {Title} = Typography;
 
+interface FormValues {
+    title: string,
+    description: string,
+    boardId: number,
+    priority: 'High' | 'Medium' | 'Low',
+    status: 'Backlog' | 'InProgress' | 'Done',
+    assigneeId: number;
+}
 
-const Popup = observer(() => {
-    const [form] = Form.useForm();
+const Popup:FC = observer(() => {
+    const [form] = Form.useForm<FormValues>();
     useEffect(() => {
         if (taskStore.modalIsOpen) {
             form.setFieldsValue(taskStore.modalData);
@@ -31,7 +39,7 @@ const Popup = observer(() => {
         }
     };
 
-    const handleInputChange = (field: string, value: number|string) => {
+    const handleInputChange = <K extends keyof Tasks>(field: K,value:Tasks[K]) => {
         taskStore.setModalData({
             ...taskStore.modalData,
             [field]: value,
